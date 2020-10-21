@@ -44,4 +44,16 @@ public struct Container: RawWidget, HasContext, AutoDecodable {
     ) {
         self.init(children: children(), widgetProperties: widgetProperties, context: context, onInit: onInit)
     }
+    
+    #if swift(<5.3)
+    public init(
+        context: Context? = nil,
+        onInit: [RawAction]? = nil,
+        widgetProperties: WidgetProperties = WidgetProperties(),
+        @ChildBuilder
+        _ children: () -> RawComponent
+    ) {
+        self.init(children: [children()], widgetProperties: widgetProperties, context: context, onInit: onInit)
+    }
+    #endif
 }

@@ -84,4 +84,15 @@ public struct TabView: RawComponent, AutoInitiable, HasContext {
     ) {
         self.init(children: children(), styleId: styleId, context: context)
     }
+    
+    #if swift(<5.3)
+    public init(
+        context: Context? = nil,
+        styleId: String? = nil,
+        @TabItemBuilder
+        _ children: () -> TabItem
+    ) {
+        self.init(children: [children()], styleId: styleId, context: context)
+    }
+    #endif
 }
